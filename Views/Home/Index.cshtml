@@ -1,0 +1,43 @@
+﻿@using PracModel2Part3.Controllers
+@using System.Diagnostics;
+@using PracModel2Part3.Models
+@model PracModel2Part3.Models.IndexModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    FractionController FractionController = new FractionController();
+    Fraction res = FractionController.Subtraction(new Fraction(5, 6), new Fraction(3, 4));
+    Fraction res2 = FractionController.Scorot(new Fraction(3, 12));
+    Debug.WriteLine($"{res.Numerator}/{res.Denominator}");
+    Debug.WriteLine($"{res2.Numerator}/{res2.Denominator}");
+    FractionController.SaveToFile("D:\\fraction123.txt", new Fraction(12, 4));
+    Fraction r = FractionController.LoadFromFile("D:\\fraction123.txt");
+}
+
+<div class="text-center">
+  @*  @using (Html.BeginForm("GetRes", "Home", FormMethod.Get, new { enctype = "multipart/form-data" }))
+    {*@
+        <form asp-controller="Home" asp-action="GetRes"
+     asp-route-returnurl="/"
+     method="get" class="form-horizontal" role="form">
+        <div class="form-group mb-0 align-middle">
+            <label>Name</label>
+            <input type="text" name="frac1" class="mr-5">
+            <label for="Znak">Znak</label>
+            <select name="znak" class="mr-5">
+                <option>-</option>
+                <option>+</option>
+                <option>*</option>
+                <option>/</option>
+            </select>
+            <label>Name</label>
+            <input type="text" name="frac2" class="mr-5">
+            <button class="btn btn-primary">Calculate</button>
+        </div>
+    </form>
+
+    <h2>Load from file: @r.Numerator/@r.Denominator</h2>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
